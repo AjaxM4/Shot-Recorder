@@ -31,7 +31,7 @@ forward OnShotRecorderRegister(playerid);
 // *** Bodypart & Dialog Datas
 enum
 {
-	DIALOG_ShotStatsDialog
+    DIALOG_ShotStatsDialog
 };
 
 enum PlayerData
@@ -59,8 +59,8 @@ public OnFilterScriptInit()
 	// 'Load' message
 
     print("\n----------------------------------");
-	  print("aShotRecorder by AjaxM - Loaded!\n");
-	  print("----------------------------------\n");
+    print("aShotRecorder by AjaxM - Loaded!\n");
+    print("----------------------------------\n");
 	
     // MySQL - Printing Errors & Connections
     mysql_log(LOG_ALL);
@@ -81,12 +81,12 @@ public OnPlayerConnect(playerid)
     new query[128];
     mysql_format(mysql, query, sizeof(query), "SELECT `ID` FROM `ShotRecords` WHERE `Name` = '%e' LIMIT 1", pName(playerid));
     mysql_tquery(mysql, query, "CheckAccount", "i", playerid);
-	return 1;
+    return 1;
 }
 
 public OnPlayerDisconnect(playerid, reason)
 {
-	SavePlayerShots(playerid);
+    SavePlayerShots(playerid);
     return 1;
 }
 
@@ -96,13 +96,13 @@ public OnPlayerTakeDamage(playerid, issuerid, Float: amount, weaponid, bodypart)
 	  {
 	      switch(bodypart)
 	        {
-            case WEAPON_BODY_PART_CHEST: pInfo[issuerid][Chest] += 1;
-            case WEAPON_BODY_PART_TORSO: pInfo[issuerid][Torso] += 1;
-            case WEAPON_BODY_PART_LEFT_ARM: pInfo[issuerid][LeftArm] += 1;
-            case WEAPON_BODY_PART_RIGHT_ARM: pInfo[issuerid][RightArm] += 1;
-            case WEAPON_BODY_PART_LEFT_LEG: pInfo[issuerid][RightLeg] += 1;
-            case WEAPON_BODY_PART_RIGHT_LEG: pInfo[issuerid][LeftLeg] += 1;
-            case WEAPON_BODY_PART_HEAD: pInfo[issuerid][Head] += 1;
+		    case WEAPON_BODY_PART_CHEST: pInfo[issuerid][Chest] += 1;
+		    case WEAPON_BODY_PART_TORSO: pInfo[issuerid][Torso] += 1;
+		    case WEAPON_BODY_PART_LEFT_ARM: pInfo[issuerid][LeftArm] += 1;
+		    case WEAPON_BODY_PART_RIGHT_ARM: pInfo[issuerid][RightArm] += 1;
+		    case WEAPON_BODY_PART_LEFT_LEG: pInfo[issuerid][RightLeg] += 1;
+		    case WEAPON_BODY_PART_RIGHT_LEG: pInfo[issuerid][LeftLeg] += 1;
+		    case WEAPON_BODY_PART_HEAD: pInfo[issuerid][Head] += 1;
 	        }
     }
     return 1;
@@ -193,7 +193,7 @@ public LoadPlayerShots(playerid) // Loading all the shots
 public OnShotRecorderRegister(playerid) // For Debugging
 {
     pInfo[playerid][ID] = cache_insert_id();
-	  return 1;
+    return 1;
 }
 
 SavePlayerShots(playerid) // Saving all the shots
@@ -206,18 +206,18 @@ SavePlayerShots(playerid) // Saving all the shots
     pInfo[playerid][RightArm],
     pInfo[playerid][LeftLeg],
     pInfo[playerid][RightLeg],
-	  pInfo[playerid][Head],
-	  pInfo[playerid][Missed],
-	  pInfo[playerid][ID]);
+    pInfo[playerid][Head],
+    pInfo[playerid][Missed],
+    pInfo[playerid][ID]);
     mysql_tquery(mysql, query, "", "");
-	  return 1;
+    return 1;
 }
 
 pName(playerid)
 {
     new pN[MAX_PLAYER_NAME];
-	  GetPlayerName(playerid, pN, sizeof(pN));
-	  return pN;
+    GetPlayerName(playerid, pN, sizeof(pN));
+    return pN;
 }
 
 /*
